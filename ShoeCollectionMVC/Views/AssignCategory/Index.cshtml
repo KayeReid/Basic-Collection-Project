@@ -1,0 +1,39 @@
+﻿@model ShoeCollectionMVC.Models.AssignCategoryViewModel
+
+@{
+    ViewBag.Title = "Add Categories";
+}
+
+<h3>Add Categories to @Model.ShoeName</h3>
+
+@using (Html.BeginForm("Index", "AssignCategory"))
+{
+    @Html.HiddenFor(model => model.ShoeId)
+    @Html.DropDownListFor(model => model.CategoryId, Model.Categories)
+    @Html.ValidationMessageFor(model => model.CategoryId)
+    <p>
+        <br />
+        <input type="submit" value="Save" />
+    </p>
+}
+
+<h3>@Model.ShoeName Categories</h3>
+
+<table class="table">
+
+    @foreach (var item in Model.AssociatedCategories)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Delete", "Delete", new { CategoryId = item.ID, ShoeId = Model.ShoeId })
+            </td>
+            <td>&nbsp;&nbsp;</td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CategoryName)
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+@Html.ActionLink("Back to List", "Index", "ShoeItems")

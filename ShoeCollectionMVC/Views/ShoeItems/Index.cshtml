@@ -1,0 +1,94 @@
+﻿@model IEnumerable<ShoeCollectionMVC.Models.ShoeItem>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoeTypes.TypeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ShoeName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Enabled)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.StockCount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastOrderDate)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.LastModified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LastModifiedBy)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Comments)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoeTypes.TypeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShoeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Enabled)
+        </td*@>
+        <td>
+            @Html.DisplayFor(modelItem => item.StockCount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastOrderDate)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.LastModified)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastModifiedBy)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Comments)
+        </td>
+        <td>
+            @foreach (var categoryName in item.Categories.Select(c => c.CategoryName).ToList())
+            {
+                <span>@categoryName, </span>
+            }
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })|
+            @Html.ActionLink("Assign Categories", "Index", "AssignCategory", new { ShoeId = item.ID }, null)
+        </td>
+    </tr>
+}
+
+</table>
